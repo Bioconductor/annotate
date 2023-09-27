@@ -9,7 +9,8 @@ Imports: Biobase, DBI, xtable, graphics, utils, stats, methods,
         BiocGenerics (>= 0.13.8), httr
 Suggests: hgu95av2.db, genefilter, Biostrings (>= 2.25.10), IRanges, rae230a.db,
         rae230aprobe, tkWidgets, GO.db, org.Hs.eg.db, org.Mm.eg.db,
-        humanCHRLOC, Rgraphviz, RUnit,
+        humanCHRLOC, Rgraphviz, RUnit, BiocStyle, knitr
+VignetteBuilder: knitr
 License: Artistic-2.0
 LazyLoad: yes
 Collate: AllGenerics.R ACCNUMStats.R Amat.R AnnMaps.R chromLocation.R
