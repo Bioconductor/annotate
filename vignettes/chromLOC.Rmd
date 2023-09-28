@@ -14,18 +14,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{=latex}
-\usepackage{hyperref}
-```
-```{=latex}
-\usepackage[authoryear,round]{natbib}
-```
-```{=latex}
-\usepackage{times}
-```
-```{=latex}
-\bibliographystyle{plainnat}
-```
 # Overview
 
 The annotate package provides a class that can be used to model
@@ -88,7 +76,6 @@ entirety.
 showBasicMethods <- organism(z)
 dataSource(z)
 ```
-
 
 ## The chromLocs list is extremely large. 
 Let's only look at one of the elements. 
