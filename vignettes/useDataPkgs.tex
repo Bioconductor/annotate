@@ -17,8 +17,9 @@
 \usepackage[authoryear,round]{natbib}
 \usepackage{times}
 
+\usepackage{Sweave}
 \begin{document}
-\SweaveOpts{concordance=TRUE}
+\input{useDataPkgs-concordance}
 \title{Using Bioconductor's Annotation Libraries}
 
 \author{Marc Carlson, Jianhua Zhang}
@@ -126,116 +127,6 @@ the library for both Unix and Windows.
 Typing library(library name) in an R session will load the library
 into R. For example,
 
-<<loadLibs>>=
-library("annotate")
-library("hgu95av2.db")
-library("GO.db")
-@
-
-\subsection*{Documentations}
-
-Each library contains documentation for the library in general and each of the
-individual mapping objects contained by the library. Two documents at the
-library level can be accessed by typing a library basename proceeded by a
-question mark (e. g. ?hgu95av2) and the library basename followed by a pair of
-brackets (e. g. hgu95av2()), respectively. The former explains what the
-package is and details how a user can get more information, while the latter
-lists all the mappings contained by a library and provides information on
-the total number of keys within each of the maps contained by the library and
-how many of these keys are annotated.  In addition, the latter will indicate
-the sources for the information provided by the package as well as the date
-that these sources claim to have last been updated.
-
-The documentation for a given mapping object can be accessed by
-typing the name of an mapping object proceeded by a question mark
-(e. g. \Robject{hgu95av2GO}). The resulting documentation provides detail
-explanations to the mapping object, data source used to build the
-object, and example code for accessing annotation data.
-
-\subsection*{Accessing annotation data within a library}
-
-Annotation data of a given library are stored as mapping objects
-in the form of key (items to be annotated) and value (annotation for
-an key item) pairs. Each mapping object provides annotation for keys
-for a particular subject reflected by the name of the object. For
-example, \Robject{hgu95av2GO} annotates probes on the HG\-U95Av2 chip
-with ids of the Gene Ontology terms the probes correspond to.
-
-The name of an mapping object consists of package basename (\Rpackage{hgu95av2.db}) and
-mapping name (\Rpackage{GO}) to avoid confusion when multiple libraries are loaded
-to the system at the same time. Data contained by an mapping can
-be accessed easily using Bioconductor's existing functions. For example, the following code
-stores all the keys contained by the \Robject{hgu95av2GO} mapping object to
-variable \textit{temp} and displays the first five keys on the screen:
-
-<<getGO>>=
-as.list(hgu95av2GO[5])
-@
-
-To obtain annotation for a given set of keys, one may use the
-\Rfunction{mget} function. Suppose we have run an experiment using the
-HG\_U95Av2 chip and found three genes represented by Affymetrix probe ids
-\textit{738\_at, 40840\_at}, and \textit{41668\_r\_at} interesting. To
-get the names of genes the three probe ids corresponding to, we do:
-
-<<showmget>>=
-mget(c("738_at", "40840_at", "41668_r_at"), hgu95av2GENENAME)
-@
-
-Similarly, identifiers of Gene Ontology terms corrsponding to the
-three probes can be obtained as shown below:
-
-<<moremget>>=
-temp <- mget(c("41561_s_at", "40840_at", "41668_r_at"), hgu95av2GO)
-@
-
-In this case, the function \Rfunction{mget} returns a list of
-pre-defined S4 objects containing data for the ids, ontology, and
-evidence code of Gene Ontology terms corresponding to the three
-keys. The following code shows how to access the GO id, evidence code
-and ontology of the Gene Ontology term corresponding to probe id
-\textit{40840\_at}:
-
-<<gettingGO>>=
-temp <- get("738_at", hgu95av2GO)
-names(temp)
-temp[["GO:0008253"]][["Evidence"]]
-temp[["GO:0008253"]][["Ontology"]]
-@
-
-As shown above, probe \textit{40840\_at} can be annotated by three Gene
-Ontology terms identified by \textit{GO:0005829}, \textit{GO:0008253}, and
-\textit{GO:0016787}. The evidence code for \textit{GO:0008253} is
-\textit{TAS} (traceable author statement) and it belongs to ontology
-\textit{MF} (molecular function).
-
-\subsection*{Accessing annotation data across libraries}
-
-Often, data available in a given data package alone may not
-be sufficient and need to be sought across packages. Bioconductor's
-annotation data packages are linked by common public data identifiers
-to allow traverse between packages (Fig. 1). Using the example above,
-we know that probe id \textit{738\_at} are annotated by three Gene Ontology
-ids \textit{GO:0005829}, \textit{GO:0008253}, and \textit{GO:0016787}. The Gene Ontology
-terms for various Gene Ontology ids, however, are stored in another
-package named \Rpackage{GO.db}. AS package \Rpackage{hgu95av2.db} and
-\Rpackage{GO.db} are linked by \Rpackage{GO} ids, one can annotate probe id
-\textit{738\_at} with Gene Ontology terms by linking data in the
-two packages using \Rpackage{GO} id as shown below:
-
-<<>>=
-mget(names(get("738_at", hgu95av2GO)), GOTERM)
-@
-
-It turns out that probe id \textit{738\_at} (corresponding to \textit{GO:0008253}, and \textit{GO:0016787}) has molecular function (MF)
-\textit{5'-nucleotidase activity} and \textit{hydrolase activity}.
-
-\section{Session Information}
-
-The version number of R and packages loaded for generating the vignette were:
-
-<<echo=FALSE>>=
-sessionInfo()
-@
-
-\end{document}
+\begin{Schunk}
+\begin{Sinput}
+> library("annotate")
