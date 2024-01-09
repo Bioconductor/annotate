@@ -2,14 +2,13 @@
 title: "HowTo: Build and use chromosomal information"
 author:
   - name: "Jeff Gentry"
-    affiliation: "The original vignette."
   - name: "Kritika Verma"
     affiliation: "Vignette translation from Sweave to R Markdown / HTML"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
   BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{ HowTo: Build and use chromosomal information }
+  %\VignetteIndexEntry{HowTo: Build and use chromosomal information}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,20 +22,20 @@ the organism and its chromosomes and provides a standardized interface
 to the information in the metadata packages for other software to
 quickly extract necessary chromosomal information. An example of using
 *chromLocation* objects in other software can be found with the
-`alongChrom` function of the *geneplotter* package in Bioconductor.
+`alongChrom` function of the `r Biocpkg("geneplotter")` package in Bioconductor.
 
 # The chromLocation class
 
-The *chromLocation* class is used to provide a structure for chromosomal
-data of a particular organism. In this section, we will discuss the
-various slots of the class and the methods for interacting with them.
-Before this though, we will create an object of class *chromLocation*
-for demonstration purposes later. The helper function
-`buildChromLocation` is used, and it takes as an argument the name of a
-Bioconductor metadata package, which is itself used to extract the data.
-For this vignette, we will be using the *hgu95av2.db* package.
+The *chromLocation* class is used to provide a structure for chromosomal data of
+a particular organism. In this section, we will discuss the various slots of the
+class and the methods for interacting with them. Before this though, we will
+create an object of class *chromLocation* for demonstration purposes later. The
+helper function `buildChromLocation` is used, and it takes as an argument the
+name of a Bioconductor metadata package, which is itself used to extract the
+data. For this vignette, we will be using the `r Biocpkg("hgu95av2.db")`
+package.
 
-```{r buildCL}
+```{r buildCL, message=FALSE}
 library("annotate")
 z <- buildChromLocation("hgu95av2")
 z
@@ -62,43 +61,35 @@ six slots in this class:
     geneSymbols:    An environment that maps a probe ID to the appropriate
                     gene symbol.
 
-There is a basic 'get' type method for each of these slots, all with the
-same name as the respective slot. In the following example, we will
-demonstrate these basic methods. For the `probesToChrom` and
-`geneSymbols` methods, the return value is an environment which maps a
-probe ID to other values, we will be using the probe ID '32972_at',
-which was selected at random for these examples. We are showing only
-part of the `chromLocs` method's output as it is quite long in its
+There is a basic 'get' type method for each of these slots, all with the same
+name as the respective slot. In the following example, we will demonstrate these
+basic methods. For the `probesToChrom` and `geneSymbols` methods, the return
+value is an environment which maps a probe ID to other values, we will be using
+the probe ID '32972_at', which was selected at random for these examples. We are
+showing only part of the `chromLocs` method's output as it is quite long in its
 entirety.
 
 
-```{r}
-showBasicMethods <- organism(z)
+```{r showBasicMethods}
+organism(z)
+
 dataSource(z)
-```
 
-## The chromLocs list is extremely large. 
-Let's only look at one of the elements. 
-
-```{r names}
+## The chromLocs list is extremely large. Let's only
+## look at one of the elements.
 names(chromLocs(z))
-```
+chromLocs(z)[["Y"]]
 
-```{r probesToChrom}
 get("32972_at", probesToChrom(z))
-```
 
-```{r chromInfo}
 chromInfo(z)
-```
 
-```{r geneSymbols}
 get("32972_at", geneSymbols(z))
 ```
 
-Another method which can be used to access information about the
-particular *chromLocation* object is the `nChrom` method, which will
-list how many chromosomes this organism has:
+Another method which can be used to access information about the particular
+*chromLocation* object is the `nChrom` method, which will list how many
+chromosomes this organism has:
 
 ```{r nChrom}
 nChrom(z)
@@ -106,11 +97,10 @@ nChrom(z)
 
 # Summary
 
-The *chromLocation* class has a simple design, but can be powerful if
-one wants to store the chromosomal data contained in a Bioconductor
-package into a single object. These objects can be created once and then
-passed around to multiple functions, which can cut down on computation
-time to access the desired information from the package. These objects
-allow access to basic but also important information, and provide a
-standard interface for writers of other software to access this
-information.
+The *chromLocation* class has a simple design, but can be powerful if one wants
+to store the chromosomal data contained in a Bioconductor package into a single
+object. These objects can be created once and then passed around to multiple
+functions, which can cut down on computation time to access the desired
+information from the package. These objects allow access to basic but also
+important information, and provide a standard interface for writers of other
+software to access this information.
