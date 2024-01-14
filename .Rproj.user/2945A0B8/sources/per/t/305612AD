@@ -1,0 +1,27 @@
+{
+    "id": "305612AD",
+    "path": "C:/Users/user/Desktop/Bioconductors/vignettes/useDataPkgs.Rmd",
+    "project_path": "vignettes/useDataPkgs.Rmd",
+    "type": "r_markdown",
+    "hash": "4250631279",
+    "contents": "",
+    "dirty": false,
+    "created": 1704570512002.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "215,0",
+        "scrollLine": "200",
+        "working_dir": "current"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1705240738,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1705240738276,
+    "read_only": false,
+    "read_only_alternatives": []
+}
