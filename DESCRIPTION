@@ -1,6 +1,6 @@
 Package: annotate
 Title: Annotation for microarrays
-Version: 1.91.0
+Version: 1.91.1
 Author: R. Gentleman
 Authors@R: c(
         person("Jeff", "Gentry", role = "aut"),
@@ -14,9 +14,10 @@ Description: Using R enviroments for annotation.
 Depends: R (>= 2.10), AnnotationDbi (>= 1.27.5), XML
 Imports: Biobase, DBI, xtable, graphics, utils, stats, methods,
         BiocGenerics (>= 0.13.8), httr
-Suggests: hgu95av2.db, genefilter, Biostrings (>= 2.25.10), IRanges, rae230a.db,
+Suggests: hgu95av2.db, genefilter, Biostrings (>= 2.25.10), IRanges,
+        GenomicRanges, TxDb.Hsapiens.UCSC.hg38.knownGene, rae230a.db,
         rae230aprobe, tkWidgets, GO.db, org.Hs.eg.db, org.Mm.eg.db,
-        humanCHRLOC, Rgraphviz, RUnit, BiocStyle, knitr
+        Rgraphviz, RUnit, BiocStyle, knitr
 VignetteBuilder: knitr
 License: Artistic-2.0
 LazyLoad: yes

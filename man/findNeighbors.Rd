@@ -8,6 +8,11 @@
 \title{A function to locate neighboring genes within a defined range
   around a target gene represented by a Entrez Gene ID }
 \description{
+  IMPORTANT NOTE: \code{findNeighbors} and its helper functions are
+  deprecated in BioC 3.24. They will be defunct in BioC 3.25 and
+  removed in BioC 3.26. See examples at the bottom of this page for a
+  GRanges-based approach to finding the genomic neighbors of a given gene.
+
   Give a data package with mappings between Entrez Gene IDs and their
   locations on chromosomes, this function locates genes that are
   within a defined range on a given chromosome. If a Entrez Gene ID is
@@ -89,11 +94,37 @@ weightByConfi(foundLLs)
 \author{Jianhua Zhang}
 
 \examples{
+## findNeighbors() is deprecated with no exact replacement.
+## See below for a GRanges-based approach to finding the genomic neighbors
+## of a given gene.
+\dontrun{
 if(require("humanCHRLOC")){
    findNeighbors("humanCHRLOC", "51806", 10, upBase = 600000, downBase = 600000)
 }else{
    print("Can not find neighbors without the required data package")
 }
+}
+
+## Finding the genomic neighbors of a given gene using the appropriate
+## TxDb package:
+
+library(TxDb.Hsapiens.UCSC.hg38.knownGene)
+human_genes <- sort(genes(TxDb.Hsapiens.UCSC.hg38.knownGene))
+
+target_gene <- subset(human_genes, gene_id == "51806")
+target_gene
+
+window <- target_gene
+start(window) <- start(window) - 600000
+end(window) <- end(window) + 600000
+window
+
+same_strand_neighbors <- subsetByOverlaps(human_genes, window)
+same_strand_neighbors
+
+both_strand_neighbors <- subsetByOverlaps(human_genes, window,
+                                          ignore.strand=TRUE)
+both_strand_neighbors
 }
 \keyword{manip}
 

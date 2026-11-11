@@ -1,6 +1,6 @@
 findNeighbors <- function(chrLoc, llID, chromosome, upBase, downBase,
                           mergeOrNot = TRUE){
-
+    .Deprecated(msg="findNeighbors() is deprecated")
     require(chrLoc, character.only = TRUE) ||
                            stop(paste("Chromomosome location chrLoc",
                                       "is not available on the system",
@@ -72,6 +72,7 @@ findNeighbors <- function(chrLoc, llID, chromosome, upBase, downBase,
 }
 
 checkArgs <- function(llID, chromosome, upBase, downBase){
+    .Deprecated(msg="checkArgs() is deprecated")
     # llID is not required if search for genes within a range
     if(missing(llID)){
         # Both upBase, downBase, and chromosome must be there if
@@ -104,6 +105,7 @@ checkArgs <- function(llID, chromosome, upBase, downBase){
 }
 
 findChr4LL <- function(llID, chrEnv, organism){
+    .Deprecated(msg="findChr4LL() is deprecated")
     options(show.error.message = FALSE)
     chr <- try(chrEnv[[llID]])
     options(show.error.message = TRUE)
@@ -127,6 +129,7 @@ findChr4LL <- function(llID, chrEnv, organism){
 
 
 getValidChr <- function(organism){
+    .Deprecated(msg="getValidChr() is deprecated")
     switch(toupper(organism),
            HUMAN = return(c(1:22, "X", "Y")),
            MOUSE = return(c(1:19, "X", "Y")),
@@ -135,6 +138,7 @@ getValidChr <- function(organism){
 }
 
 getBoundary <- function(loc, base, lower = TRUE){
+    .Deprecated(msg="getBoundary() is deprecated")
     if(as.numeric(loc[1]) == 0){
         return(base)
     }else{
@@ -152,6 +156,7 @@ getBoundary <- function(loc, base, lower = TRUE){
 }
 
 weightByConfi <- function(foundLLs){
+    .Deprecated(msg="weightByConfi() is deprecated")
     if(length(foundLLs) != 0){
         temp <- unique(names(foundLLs))
         foundLLs <- gsub("(^.*)\\..*", "\\1", temp)
